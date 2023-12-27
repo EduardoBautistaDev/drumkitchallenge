@@ -6,12 +6,15 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++){
         var buttonInnerHTML = this.innerHTML;
 
         takeKey(buttonInnerHTML);
+
+        buttonAnimation(buttonInnerHTML);
         
     });
 }
 
 document.addEventListener("keydown", function(event) {
-    takeKey(event.key)
+    takeKey(event.key);
+    buttonAnimation(event.key);
 });
 
 // var audio = new Audio('sounds/tom-1.mp3');
@@ -55,4 +58,12 @@ function takeKey(k){
             audio.play();
             break;
     }
+}
+
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");        
+    }, 100);
 }
